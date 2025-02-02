@@ -65,6 +65,8 @@ func (h *EventHandler) CreateOne(ctx *fiber.Ctx) error {
 		})
 	}
 
+	// Generate a unique ID before saving to the database
+	event.ID = models.GenerateID(event.Name, event.Location, event.Date)
 	event, err := h.repository.CreateOne(context, event)
 
 	if err != nil {
